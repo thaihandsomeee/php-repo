@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Gate;
 class CommentController extends Controller
 {
     public function store(Request $request, Photo $photo) {
-        Gate::authorize('view-photo', $photo);
+        $this->authorize('view-photo', $photo);
         $data = $request->validate(['body' => 'required|string']);
         $photo->comments()->create(['user_id' => auth()->id(), 'body' => $data['body']]);
         return back()->with('success', 'Comment posted!');

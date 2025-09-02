@@ -21,7 +21,7 @@
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg mb-6">
                 <div class="p-6 text-gray-900">
                     <h3 class="text-lg font-medium text-gray-900 mb-4">Upload New Photo</h3>
-                    <form action="{{ route('photos.store', $album) }}" method="POST" enctype="multipart/form-data">
+                    <form action="{{ route('albums.photos.store', $album) }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         <div>
                             <x-input-label for="photo" value="Photo File (Max 10MB)" />
@@ -54,7 +54,7 @@
                                         <form action="{{ route('photos.destroy', $photo) }}" method="POST" onsubmit="return confirm('Are you sure?');">
                                             @csrf
                                             @method('DELETE')
-                                            <button type="submit" class="absolute top-2 right-2 bg-red-500 text-white rounded-full p-1 text-xs opacity-0 group-hover:opacity-100">&times;</button>
+                                            <button type="submit" class="">&times; Delete</button>
                                         </form>
                                     @endcan
                                 </div>

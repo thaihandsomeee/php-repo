@@ -34,9 +34,13 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     Route::resource('albums', AlbumController::class);
-    Route::get('/albums/{album}/share', [AlbumController::class, 'share'])->name('albums.share');
-    Route::post('/albums/{album}/share', [AlbumController::class, 'storeShare'])->name('albums.storeShare');
-    Route::post('/albums/{album}/photos', [PhotoController::class, 'store'])->name('photos.store');
+
+    Route::prefix('albums/{album}')->name('albums.')->group(function () {
+        Route::get('/share', [AlbumController::class, 'share'])->name('share');
+        Route::post('/share', [AlbumController::class, 'storeShare'])->name('storeShare');
+        Route::post('/photos', [PhotoController::class, 'store'])->name('photos.store');
+    });
+
     Route::delete('/photos/{photo}', [PhotoController::class, 'destroy'])->name('photos.destroy');
     Route::get('/photos/{photo}', [PhotoController::class, 'show'])->name('photos.show');
     Route::post('/photos/{photo}/comments', [CommentController::class, 'store'])->name('comments.store');
